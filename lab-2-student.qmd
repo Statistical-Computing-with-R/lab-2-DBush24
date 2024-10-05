@@ -149,7 +149,12 @@ the $x$-axis) and `hindfoot_length` (on the $y$-axis).**
 ggplot(data = surveys,
        mapping = aes(x = weight, 
                      y = hindfoot_length)) + 
-  geom_point(alpha = 0.5)
+  geom_point(alpha = 0.5) +
+  facet_wrap(~species) + 
+  labs(x = "Weight (g)", 
+        y = NULL,
+        title = "Change in Hindfoot Length (mm) By Weight",
+        subtitle = "Hindfoot Length (mm)")
 
 ```
 
@@ -180,7 +185,21 @@ It takes a larger cognitive load to read text that is rotated. It is common prac
 
 ```{r}
 #| label: boxplot
+ggplot(data = surveys,
+       mapping = aes(x = species,
+                     y = weight)) +
+  geom_jitter(color = "orange3", alpha = 0.25) +
+  geom_boxplot(outliers = FALSE) + 
+  labs(x = "Species", 
+       y = NULL, 
+       title = "Boxplot of Species vs Weight",
+       subtitle = "Weight (g)") +
+  theme(axis.text.x = element_text(angle = 45) ) + 
+  theme(axis.text.y = element_text(angle = 45 ))
 
+#http://www.sthda.com/english/wiki/ggplot2-axis-ticks-a-guide-to-customize-tick-marks-and-labels
+
+help(geom_boxplot)
 
 ```
 
@@ -227,6 +246,20 @@ Some people (and journals) prefer for boxplots to be stacked with a specific ori
 
 ```{r}
 #| label: rotated-boxplot
+ggplot(data = surveys,
+       mapping = aes(x = species,
+                     y = weight)) +
+  geom_jitter(color = "orange3", alpha = 0.25) +
+  geom_boxplot(outliers = FALSE) + 
+  labs(x = "Species", 
+       y = NULL, 
+       title = "Boxplot of Species vs Weight",
+       subtitle = "Weight (g)") +
+  theme(axis.text.x = element_text(angle = 45) ) + 
+  theme(axis.text.y = element_text(angle = 45 )) +
+  coord_flip()
+
+#https://stackoverflow.com/questions/76543808/how-to-flip-geom-boxplot-and-rescale-axis
 
 ```
 
