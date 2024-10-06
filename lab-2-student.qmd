@@ -62,6 +62,7 @@ In the code chunk below, load in the packages necessary for your analysis. You s
 
 ```{r}
 #| label: setup
+#| echo: true
 library(tidyverse)
 
 ```
@@ -101,7 +102,8 @@ represent:
 **1. Using the `read_csv()` function, write the code necessary to load in the `surveys.csv` dataset (stored in the data folder). For simplicity, name the data `surveys`.**
 
 ```{r}
-#| label: load-data
+#| label: load-data'
+#| echo: true
 surveys <- read_csv(here::here("data","surveys.csv"),
                     show_col_types = FALSE)
 
@@ -131,6 +133,7 @@ for different types of plots:
 ```{r}
 #| eval: false
 #| label: ggplot-template-code
+#| echo: true
 
 ggplot(data = <DATA>,
        mapping = aes(<VARIABLE MAPPINGS>)) +
@@ -146,6 +149,7 @@ the $x$-axis) and `hindfoot_length` (on the $y$-axis).**
 
 ```{r}
 #| label: scatterplot
+#| echo: true
 ggplot(data = surveys,
        mapping = aes(x = weight, 
                      y = hindfoot_length)) + 
@@ -185,6 +189,7 @@ It takes a larger cognitive load to read text that is rotated. It is common prac
 
 ```{r}
 #| label: boxplot
+#| echo: true
 ggplot(data = surveys,
        mapping = aes(x = species,
                      y = weight)) +
@@ -246,6 +251,7 @@ Some people (and journals) prefer for boxplots to be stacked with a specific ori
 
 ```{r}
 #| label: rotated-boxplot
+#| echo: true
 ggplot(data = surveys,
        mapping = aes(x = species,
                      y = weight)) +
@@ -292,14 +298,18 @@ might want to look up the help documentation for `aov()`.
 
 ```{r}
 #| label: anova
+#| echo: true
 
-species_mod <- aov()
+help("aov")
+species_mod <- aov(weight~species, 
+                   data = surveys)
 
 summary(species_mod)
 ```
 
 **18. Based on the results of the ANOVA F-test, draw a conclusion in context of the hypotheses. Make sure to cite appropriate output from above.**
 
+With a p value of less than 2e^-16 there is significant evidence that not all the mean weights are the same between the fourteen rodent species.
 
 # Lab 2 Submission
 
