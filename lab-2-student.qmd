@@ -5,6 +5,11 @@ format: html
 editor: source
 embed-resources: true
 code-tools: true
+echo: true
+code-fold: true
+theme: quartz
+toc: true
+toc-depth: 2
 ---
 
 # Part 1: GitHub Workflow
@@ -204,8 +209,6 @@ ggplot(data = surveys,
 
 #http://www.sthda.com/english/wiki/ggplot2-axis-ticks-a-guide-to-customize-tick-marks-and-labels
 
-help(geom_boxplot)
-
 ```
 
 **10. Create side-by-side boxplots to visualize the distribution of weight within each species.**
@@ -322,3 +325,23 @@ For Lab 2 you will submit **only** your HTML file. Your HTML file is required to
 **If any of the options are not included, your Lab 2 or Challenge 2 assignment will receive an "Incomplete" and you will be required to submit a revision.**
 
 In addition, your document should not have any warnings or messages output in your HTML document. **If your HTML contains warnings or messages, you will receive an "Incomplete" for document formatting and you will be required to submit a revision.**
+
+```{r}
+#| label: Challenge
+#| #| echo: true
+
+ggplot(data = surveys,
+       mapping = aes(x = weight,
+                     y = species,
+                     group = species))+
+  geom_jitter(color = "orange3",
+              alpha = 0.25) +
+  labs(x = "Weight", 
+       y = NULL, 
+       title = "Density Plot of Species vs Weight",
+       subtitle = "Species") +
+  geom_density_ridges() 
+  
+
+```
+
